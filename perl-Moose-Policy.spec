@@ -1,21 +1,23 @@
-%define module   Moose-Policy
-%define version    0.03
-%define release    %mkrel 2
+%define upstream_name    Moose-Policy
+%define upstream_version 0.04
 
-Name:       perl-%{module}
-Version:    %{version}
-Release:    %{release}
-License:    GPL or Artistic
-Group:      Development/Perl
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
+
 Summary:    Moose-mounted police
-Url:        http://search.cpan.org/dist/%{module}
-Source:     http://www.cpan.org/modules/by-module/Moose/%{module}-%{version}.tar.gz
+License:    GPL+ or Artistic
+Group:      Development/Perl
+Url:        http://search.cpan.org/dist/%{upstream_name}
+Source0:    http://www.cpan.org/modules/by-module/Moose/%{upstream_name}-%{upstream_version}.tar.gz
+
+BuildRequires: perl(Module::Build::Compat)
 BuildRequires: perl(Moose)
 BuildRequires: perl(Test::Exception)
 BuildRequires: perl(Test::More)
-BuildRequires: perl(Module::Build::Compat)
+
 BuildArch: noarch
-BuildRoot:  %{_tmppath}/%{name}-%{version}
+BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 This module allows you to specify your project-wide or even company-wide
@@ -33,14 +35,14 @@ will likely get more feature-full over time, as people request features. So
 if you have a suggestion/need/idea, please speak up.
 
 %prep
-%setup -q -n %{module}-%{version} 
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
-make test
+%make test
 
 %install
 rm -rf %buildroot
@@ -54,5 +56,3 @@ rm -rf %buildroot
 %doc Changes README
 %{_mandir}/man3/*
 %perl_vendorlib/*
-
-
