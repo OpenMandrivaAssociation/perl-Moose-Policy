@@ -1,9 +1,9 @@
 %define upstream_name    Moose-Policy
-%define upstream_version 0.04
+%define upstream_version 0.05
 
 Name:       perl-%{upstream_name}
 Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 3
+Release:    %mkrel 1
 
 Summary:    Moose-mounted police
 License:    GPL+ or Artistic
