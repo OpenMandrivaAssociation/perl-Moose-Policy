@@ -1,23 +1,23 @@
 %define upstream_name    Moose-Policy
 %define upstream_version 0.05
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 1
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	2
 
-Summary:    Moose-mounted police
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/Moose/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	Moose-mounted police
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/Moose/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl(Module::Build::Compat)
-BuildRequires: perl(Moose)
-BuildRequires: perl(Test::Exception)
-BuildRequires: perl(Test::More)
+BuildRequires:	perl-devel
+BuildRequires:	perl(Module::Build::Compat)
+BuildRequires:	perl(Moose)
+BuildRequires:	perl(Test::Exception)
+BuildRequires:	perl(Test::More)
 
-BuildArch: noarch
-BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}
+BuildArch:	noarch
 
 %description
 This module allows you to specify your project-wide or even company-wide
@@ -38,21 +38,42 @@ if you have a suggestion/need/idea, please speak up.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 %make test
 
 %install
-rm -rf %buildroot
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %files
-%defattr(-,root,root)
 %doc Changes README
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
+
+
+%changelog
+* Tue Apr 26 2011 Funda Wang <fwang@mandriva.org> 0.50.0-1mdv2011.0
++ Revision: 659084
+- update to new version 0.05
+- rebuild for updated spec-helper
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - the mass rebuild of 2010.1 packages
+
+* Tue Dec 01 2009 Jérôme Quelin <jquelin@mandriva.org> 0.40.0-1mdv2010.1
++ Revision: 472194
+- update to 0.04
+
+* Fri Sep 04 2009 Thierry Vignaud <tv@mandriva.org> 0.03-2mdv2010.0
++ Revision: 430507
+- rebuild
+
+* Sat Jul 12 2008 Guillaume Rousse <guillomovitch@mandriva.org> 0.03-1mdv2009.0
++ Revision: 234135
+- import perl-Moose-Policy
+
+
+* Sat Jul 12 2008 Guillaume Rousse <guillomovitch@mandriva.org> 0.03-1mdv2009.0
+- initial mdv release, generated with cpan2dist
