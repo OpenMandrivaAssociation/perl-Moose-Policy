@@ -1,15 +1,13 @@
 %define upstream_name    Moose-Policy
-%define upstream_version 0.05
-
 Name:		perl-%{upstream_name}
-Version:	%{upstream_version}
-Release:	5
+Version:	0.05
+Release:	6
 
 Summary:	Moose-mounted police
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		https://metacpan.org/dist/Moose-Policy
-Source0:	https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Moose-Policy-%{upstream_version}.tar.gz
+Source0:	https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Moose-Policy-%{version}.tar.gz
 
 BuildRequires:	make
 BuildRequires:	perl-devel
@@ -36,7 +34,7 @@ will likely get more feature-full over time, as people request features. So
 if you have a suggestion/need/idea, please speak up.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}
+%setup -q -n %{upstream_name}-%{version}
 
 %build
 perl Makefile.PL INSTALLDIRS=vendor
